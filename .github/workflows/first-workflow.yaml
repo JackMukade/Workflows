@@ -5,9 +5,15 @@ jobs:
   run-commands:
     runs-on: ubuntu-latest
     steps:
-      - name: echo a string
+      - name: HOLA MUNDO 
         run: echo "HELLO WORLD"
-      - name: Multiline Command
-        run : | 
-          node -v
-          npm  -v
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Retrieve secret from KV
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            secretValue=$(az keyvault secret show --name "GitHubSecret" --vault-name "GitHubKeyVault" --query "value")
+            echo "SECRETVALUE="$secretValue >> $GITHUB_ENV
