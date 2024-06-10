@@ -1,3 +1,4 @@
+Copiar código
 name: First Workflow
 on: [push]
 
@@ -8,17 +9,19 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Azure Login
-      uses: azure/login@v2
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-        allow-no-subscriptions: true
-        enable-AzPSSession: true
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          allow-no-subscriptions: true
+          enable-AzPSSession: true
+
       - name: Retrieve secret from KV
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            secretValue=$(az keyvault secret show --name "GitHubSecret" --vault-name "GitHubKeyVault" --query "value")
-            echo "SECRETVALUE="$secretValue >> $GITHUB_ENV
+            secretValue=$(az keyvault secret show --name "GitHubSecret" --vault-name "GitHubKeyVault" --query "value" -o tsv)
+            echo "SECRETVALUE=$secretValue" >> $GITHUB_ENV
+
       - name: Echo secret value
-        run: echo "The secret value is: $SECRETVALUE"
+        run: echo "The secret value is: ${{ env.SECRETVALUE }}"
