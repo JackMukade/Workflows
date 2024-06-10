@@ -8,12 +8,8 @@ jobs:
       - name: HOLA MUNDO 
         run: echo "HELLO WORLD"
       - name: Azure Login
-        uses: Azure/login@v1
+        uses: Azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Retrieve secret from KV
-        uses: azure/CLI@v1
-        with:
-          inlineScript: |
-            secretValue=$(az keyvault secret show --name "GitHubSecret" --vault-name "GitHubKeyVault" --query "value")
-            echo "SECRETVALUE="$secretValue >> $GITHUB_ENV
+        run: echo "FINISH"
