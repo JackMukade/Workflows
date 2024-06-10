@@ -8,17 +8,16 @@ jobs:
   run-commands:
     runs-on: ubuntu-latest
     steps:
-      - name : "Login Azure"
+      - name: "Login Azure"
         uses: Azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           allow-no-subscriptions: true
-      - name: Azure CLI script
+      - name: "Azure CLI script"
         uses: Azure/cli@v2
         with:
           azcliversion: latest
           inlineScript: |
             echo secret=$(az keyvault secret show --vault-name AppDummyApp3 --name GithubSecret --query value) >> $GITHUB_ENV
-      - name: Use the value
-          run: |
-            echo "${{ env.secret }}"
+      - name: "Use the value"
+          run: echo "${{ env.secret }}"
