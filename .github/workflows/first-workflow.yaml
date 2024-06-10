@@ -2,18 +2,13 @@ name: First Workflow
 on: [push]
 
 jobs:
-  run-commands:
+  run-commands::
     runs-on: ubuntu-latest
     steps:
-      - name: echo a string
-        run: echo "HELLO WORLD"
-      - name: Azure Login
-        uses: Azure/login@v2
+      - name : "Login Azure"
+        uses: Azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: Retrieve secret from KV
-        uses: azure/CLI@v2
-        with:
-          inlineScript: |
-            secretValue=$(az keyvault secret show --name "GitHubSecret" --vault-name "GitHubKeyVault" --query "value")
-            echo "SECRETVALUE="$secretValue >> $GITHUB_ENV
+          allow-no-subscriptions: true
+      - name: echo a string
+        run: echo "HELLO WORLD"
