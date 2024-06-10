@@ -2,7 +2,7 @@ name: First Workflow
 on: [push]
 
 jobs:
-  run-commands::
+  run-commands:
     runs-on: ubuntu-latest
     steps:
       - name : "Login Azure"
