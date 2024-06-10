@@ -14,10 +14,9 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           allow-no-subscriptions: true
       - name: "Azure CLI script"
-        uses: Azure/cli@v2
-        with:
-          azcliversion: latest
-          inlineScript: |
-            echo secret=$(az keyvault secret show --vault-name AppDummyApp3 --name GithubSecret --query value) >> $GITHUB_ENV
+          uses: Azure/cli@v2
+          with:
+            azcliversion: latest
+            inlineScript: echo secret=$(az keyvault secret show --vault-name AppDummyApp3 --name GithubSecret --query value) >> $GITHUB_ENV
       - name: "Use the value"
           run: echo "${{ env.secret }}"
