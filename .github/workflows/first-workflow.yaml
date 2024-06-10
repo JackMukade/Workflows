@@ -21,6 +21,3 @@ jobs:
           inlineScript: |
             secretValue=$(az keyvault secret show --name "GitHubSecret" --vault-name "GitHubKeyVault" --query "value" -o tsv)
             echo "SECRETVALUE=$secretValue" >> $GITHUB_ENV
-
-      - name: Echo secret value
-        run: echo "The secret value is: ${{ env.SECRETVALUE }}"
