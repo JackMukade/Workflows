@@ -10,9 +10,9 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           allow-no-subscriptions: true
-      - name: Retrieve secret from KV
-        uses: azure/CLI@v1
+      - name: Azure CLI script
+        uses: Azure/cli@v2
         with:
+          azcliversion: latest
           inlineScript: |
-            secretValue=$(az keyvault secret show --name "AppDummyApp3" --vault-name "GitHubSecret" --query "value")
-            echo "SECRETVALUE="$secretValue >> $GITHUB_ENV
+            az account show
