@@ -23,7 +23,7 @@ jobs:
         uses: azure/cli@v2
         with:
           inlineScript: |
-            echo SECRETVALUE=$(az keyvault secret show --vault-name LlavesGithub --name GitHubSecret --query value) >> $GITHUB_ENV
-        - name: Use the value
-          run: |
-            echo "${{ env.SECRETVALUE }}"
+            cho SECRETVALUE=$(az keyvault secret show --vault-name LlavesGithub --name GitHubSecret --query value) >> $GITHUB_ENV
+      - name: Use the value
+        run: |
+          echo "${{ env.SECRETVALUE }}"
