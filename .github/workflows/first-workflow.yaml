@@ -23,7 +23,8 @@ jobs:
         uses: azure/cli@v2
         with:
           inlineScript: |
-            cho SECRETVALUE=$(az keyvault secret show --vault-name LlavesGithub --name GitHubSecret --query value) >> $GITHUB_ENV
+            SECRET=$(az keyvault secret show --name <your-secret-name> --vault-name <your-keyvault-name> --query value -o tsv)
+            echo "::set-output name=secret::$SECRET"
       - name: Use the value
         run: |
-          echo "${{ env.SECRETVALUE }}"
+          echo "Se acabo"
