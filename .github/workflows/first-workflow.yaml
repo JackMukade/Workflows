@@ -23,7 +23,7 @@ jobs:
         uses: azure/cli@v2
         with:
           inlineScript: |
-            SECRET=$(az keyvault secret show --name <GitHubSecret> --vault-name <LlavesGitHub> --query value -o tsv)
+            SECRET=$(az keyvault secret show --name GitHubSecret --vault-name LlavesGitHub --query value -o tsv)
             echo "::set-output name=secret::$SECRET"
       - name: Use the value
         run: |
