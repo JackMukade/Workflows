@@ -25,6 +25,6 @@ jobs:
           inlineScript: |
             SECRET=$(az keyvault secret show --name GitHubSecret --vault-name LlavesGitHub --query value -o tsv)
             echo "::set-output name=secret::$SECRET"
-      - name: Use the value
+      - name: Use secret in subsequent steps
         run: |
-          echo "Se acabo"
+          echo "The secret is ${{ steps.read-secret.outputs.secret }}"
